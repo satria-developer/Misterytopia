@@ -7,12 +7,24 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
             text-align: center;
             padding: 50px;
+            position: relative;
+            overflow: hidden;
         }
         h1 {
-            color: #4CAF50;
+            background: linear-gradient(90deg, #ff0080, #ff8c00, #ffd700, #00ff00, #00ffff, #0000ff, #800080);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            animation: rainbow 5s linear infinite; /* Animation for rainbow effect */
+        }
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
         button {
             background-color: #008CBA;
@@ -26,33 +38,113 @@
             cursor: pointer;
             border: none;
             border-radius: 5px;
+            position: relative; /* Added for particle positioning */
+            overflow: hidden; /* Added to contain particles */
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #005f7f; /* Darker shade on hover */
         }
         .copy-button {
             background-color: #f44336;
+        }
+        .copy-button:hover {
+            background-color: #c62828; /* Darker shade on hover */
+        }
+
+        /* Particle styles */
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particle-anim ease-out forwards;
+        }
+
+        @keyframes particle-anim {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0);
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty));
+            }
+        }
+
+        /* Overlay effect */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+            z-index: 1;
+        }
+
+        /* Content container */
+        .content {
+            position: relative;
+            z-index: 2; /* Ensure content is above overlay */
         }
     </style>
 </head>
 <body>
 
-    <h1>Selamat datang di Misterytopia!</h1>
-    <p>Ini adalah server GTPS yang sangat keren. Bergabunglah dengan kami untuk pengalaman bermain Growtopia yang luar biasa!</p>
+    <div class="overlay"></div>
+    <div class="content">
+        <h1>Selamat datang di Misterytopia!</h1>
+        <p>Ini adalah server GTPS yang sangat keren. Bergabunglah dengan kami untuk pengalaman bermain Growtopia yang luar biasa!</p>
 
-    <button onclick="window.location.href='https://www.mediafire.com/file/hh015f8g7s2r8og/Virtual_HOSTS_%2528SFILE.MOBI%2529.apk/file'">Download Virtual Host</button>
-    
-    <button onclick="window.location.href='https://www.mediafire.com/file/906k8cg1oucgg7j/misterytopia.txt/file'">Download GTPS</button>
+        <button onclick="createParticles(event); window.location.href='https://www.mediafire.com/file/hh015f8g7s2r8og/Virtual_HOSTS_%2528SFILE.MOBI%2529.apk/file'">Download Virtual Host</button>
+        
+        <button onclick="createParticles(event); window.location.href='https://www.mediafire.com/file/906k8cg1oucgg7j/misterytopia.txt/file'">Download GTPS</button>
 
-    <h2>Server IP:</h2>
-    <p>
-        91.134.85.13 growtopia1.com<br>
-        91.134.85.13 growtopia2.com<br>
-        91.134.85.13 www.growtopia1.com<br>
-        91.134.85.13 www.growtopia2.com<br>
-        91.134.85.13 RvLnd.here
-    </p>
+        <h2>Server IP:</h2>
+        <p>
+            91.134.85.13 growtopia1.com<br>
+            91.134.85.13 growtopia2.com<br>
+            91.134.85.13 www.growtopia1.com<br>
+            91.134.85.13 www.growtopia2.com<br>
+            91.134.85.13 RvLnd.here
+        </p>
 
-    <button class="copy-button" onclick="copyToClipboard()">SALIN FOR IOS</button>
+        <button class="copy-button" onclick="createParticles(event); copyToClipboard()">SALIN FOR IOS</button>
+    </div>
 
     <script>
+        function createParticles(event) {
+            const button = event.target;
+            const rect = button.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 10 + 5;
+                const tx = (Math.random() - 0.5) * 200;
+                const ty = (Math.random() - 0.5) * 200;
+                
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.setProperty('--tx', `${tx}px`);
+                particle.style.setProperty('--ty', `${ty}px`);
+                particle.style.animationDuration = `${Math.random() * 1 + 0.5}s`;
+                
+                button.appendChild(particle);
+                
+                particle.addEventListener('animationend', () => {
+                    particle.remove();
+                });
+            }
+        }
+
         function copyToClipboard() {
             const text = "91.134.85.13 growtopia1.com\n91.134.85.13 growtopia2.com\n91.134.85.13 www.growtopia1.com\n91.134.85.13 www.growtopia2.com\n91.134.85.13 RvLnd.here";
             navigator.clipboard.writeText(text).then(() => {
