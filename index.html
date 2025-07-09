@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misterytopia - GTPS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        button {
+            background-color: #008CBA;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        .copy-button {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Selamat datang di Misterytopia!</h1>
+    <p>Ini adalah server GTPS yang sangat keren. Bergabunglah dengan kami untuk pengalaman bermain Growtopia yang luar biasa!</p>
+
+    <button onclick="window.location.href='https://www.mediafire.com/file/hh015f8g7s2r8og/Virtual_HOSTS_%2528SFILE.MOBI%2529.apk/file'">Download Virtual Host</button>
+    
+    <button onclick="window.location.href='https://www.mediafire.com/file/906k8cg1oucgg7j/misterytopia.txt/file'">Download GTPS</button>
+
+    <h2>Server IP:</h2>
+    <p>
+        91.134.85.13 growtopia1.com<br>
+        91.134.85.13 growtopia2.com<br>
+        91.134.85.13 www.growtopia1.com<br>
+        91.134.85.13 www.growtopia2.com<br>
+        91.134.85.13 RvLnd.here
+    </p>
+
+    <button class="copy-button" onclick="copyToClipboard()">SALIN FOR IOS</button>
+
+    <script>
+        function copyToClipboard() {
+            const text = "91.134.85.13 growtopia1.com\n91.134.85.13 growtopia2.com\n91.134.85.13 www.growtopia1.com\n91.134.85.13 www.growtopia2.com\n91.134.85.13 RvLnd.here";
+            navigator.clipboard.writeText(text).then(() => {
+                alert('IP server telah disalin ke clipboard!');
+            });
+        }
+    </script>
+
+</body>
+</html>
